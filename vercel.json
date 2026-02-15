@@ -1,0 +1,25 @@
+{
+  "version": 2,
+  "routes": [
+    {
+      "src": "/",
+      "dest": "/index.html"
+    },
+    {
+      "src": "/demos",
+      "dest": "/demos.html"
+    },
+    {
+      "src": "/restaurant",
+      "dest": "/restaurant.html"
+    },
+    {
+      "src": "/maquis",
+      "dest": "/maquis.html"
+    },
+    {
+      "src": "/hotel",
+      "dest": "/hotel.html"
+    }
+  ]
+}

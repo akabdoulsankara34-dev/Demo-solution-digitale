@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Démo Maquis - Carte des Boissons</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #d97706 0%, #f59e0b 100%);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 1.5rem;
+            left: 1.5rem;
+            background: white;
+            color: #d97706;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+        }
+
+        .back-button:hover {
+            transform: translateX(-5px);
+        }
+
+        .demo-badge {
+            position: fixed;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: #10B981;
+            color: white;
+            padding: 0.5rem 1.25rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.875rem;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+            z-index: 100;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding-top: 5rem;
+        }
+
+        .header {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 24px;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .header h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #1F2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.125rem;
+            color: #6B7280;
+        }
+
+        .menu-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 24px;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid #d97706;
+        }
+
+        .menu-item {
+            background: #FEF3C7;
+            padding: 2rem;
+            border-radius: 16px;
+            margin-bottom: 1.5rem;
+            border: 2px solid #FCD34D;
+            transition: all 0.3s ease;
+        }
+
+        .menu-item:hover {
+            border-color: #d97706;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(217, 119, 6, 0.2);
+        }
+
+        .menu-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+
+        .item-name {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1F2937;
+        }
+
+        .item-price {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: #d97706;
+            white-space: nowrap;
+            margin-left: 1rem;
+        }
+
+        .item-description {
+            font-size: 1.125rem;
+            color: #78350F;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            justify-content: center;
+            background: white;
+            padding: 1rem;
+            border-radius: 50px;
+            border: 2px solid #d97706;
+        }
+
+        .qty-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #d97706;
+            color: white;
+            border: none;
+            font-size: 1.5rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .qty-btn:hover {
+            background: #b45309;
+            transform: scale(1.1);
+        }
+
+        .qty-btn:active {
+            transform: scale(0.95);
+        }
+
+        .qty-display {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #1F2937;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .order-summary {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 1.5rem;
+            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.2);
+            z-index: 99;
+            display: none;
+        }
+
+        .order-summary.active {
+            display: block;
+        }
+
+        .summary-content {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .summary-info {
+            flex: 1;
+        }
+
+        .summary-count {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #1F2937;
+            margin-bottom: 0.25rem;
+        }
+
+        .summary-total {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: #d97706;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .order-btn {
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            color: white;
+            padding: 1.25rem 2.5rem;
+            border-radius: 50px;
+            border: none;
+            font-size: 1.125rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+        }
+
+        .order-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(16, 185, 129, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding-top: 4rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .item-header {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .item-price {
+                margin-left: 0;
+            }
+
+            .summary-content {
+                flex-direction: column;
+            }
+
+            .order-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="/demos" class="back-button">
+        <span>←</span>
+        <span>Retour</span>
+    </a>
+
+    <div class="demo-badge">🎬 MODE DÉMO</div>
+
+    <div class="container">
+        <div class="header">
+            <div class="header-icon">🍗</div>
+            <h1>Maquis Chez Tonton</h1>
+            <p>Carte des Boissons - Exemple</p>
+        </div>
+
+        <div class="menu-section">
+            <h2 class="section-title">Nos Boissons</h2>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div class="item-name">Brakina Grande</div>
+                    <div class="item-price">1 000 FCFA</div>
+                </div>
+                <p class="item-description">
+                    Bière locale Brakina, bouteille 65cl bien fraîche. La meilleure pour accompagner vos grillades !
+                </p>
+                <div class="quantity-control">
+                    <button class="qty-btn" onclick="changeQty('boisson1', -1)">−</button>
+                    <span class="qty-display" id="qty-boisson1">0</span>
+                    <button class="qty-btn" onclick="changeQty('boisson1', 1)">+</button>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <div class="item-name">Jus de Bissap</div>
+                    <div class="item-price">800 FCFA</div>
+                </div>
+                <p class="item-description">
+                    Jus d'hibiscus frais fait maison, bien glacé. Naturel et rafraîchissant, sans conservateurs.
+                </p>
+                <div class="quantity-control">
+                    <button class="qty-btn" onclick="changeQty('boisson2', -1)">−</button>
+                    <span class="qty-display" id="qty-boisson2">0</span>
+                    <button class="qty-btn" onclick="changeQty('boisson2', 1)">+</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="order-summary" id="orderSummary">
+        <div class="summary-content">
+            <div class="summary-info">
+                <div class="summary-count"><span id="totalItems">0</span> article(s)</div>
+                <div class="summary-total"><span id="totalPrice">0</span> FCFA</div>
+            </div>
+            <button class="order-btn" onclick="sendOrder()">
+                <span>Commander via WhatsApp</span>
+                <span>📱</span>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const menu = {
+            boisson1: { name: 'Brakina Grande', price: 1000, qty: 0 },
+            boisson2: { name: 'Jus de Bissap', price: 800, qty: 0 }
+        };
+
+        function changeQty(itemId, delta) {
+            menu[itemId].qty = Math.max(0, menu[itemId].qty + delta);
+            updateDisplay();
+        }
+
+        function updateDisplay() {
+            Object.keys(menu).forEach(id => {
+                document.getElementById(`qty-${id}`).textContent = menu[id].qty;
+            });
+
+            let totalItems = 0;
+            let totalPrice = 0;
+
+            Object.values(menu).forEach(item => {
+                totalItems += item.qty;
+                totalPrice += item.price * item.qty;
+            });
+
+            document.getElementById('totalItems').textContent = totalItems;
+            document.getElementById('totalPrice').textContent = totalPrice.toLocaleString();
+
+            document.getElementById('orderSummary').classList.toggle('active', totalItems > 0);
+        }
+
+        function sendOrder() {
+            let message = '🍗 *COMMANDE MAQUIS CHEZ TONTON*\n\n';
+            
+            Object.values(menu).forEach(item => {
+                if (item.qty > 0) {
+                    message += `▫️ ${item.name} x${item.qty} = ${(item.price * item.qty).toLocaleString()} FCFA\n`;
+                }
+            });
+
+            const total = Object.values(menu).reduce((sum, item) => sum + (item.price * item.qty), 0);
+            message += `\n*TOTAL: ${total.toLocaleString()} FCFA*`;
+            message += `\n\n---\n_Ceci est une démo. Contactez-nous pour votre propre système !_`;
+
+            window.open(`https://wa.me/22656626261?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        updateDisplay();
+    </script>
+</body>
+</html>

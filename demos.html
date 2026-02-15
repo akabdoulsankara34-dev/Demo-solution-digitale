@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Démos Interactives - Choisissez votre établissement</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: rgba(255, 255, 255, 0.9);
+            color: #2563EB;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-button:hover {
+            background: white;
+            transform: translateX(-5px);
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+            color: white;
+        }
+
+        .header h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 1.5rem;
+            opacity: 0.95;
+        }
+
+        .demos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .demo-card {
+            background: white;
+            border-radius: 24px;
+            padding: 3rem 2.5rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            border: 3px solid transparent;
+            text-decoration: none;
+            display: block;
+        }
+
+        .demo-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border-color: #2563EB;
+        }
+
+        .demo-icon {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .demo-card:nth-child(1) .demo-icon {
+            animation-delay: 0s;
+        }
+
+        .demo-card:nth-child(2) .demo-icon {
+            animation-delay: 0.5s;
+        }
+
+        .demo-card:nth-child(3) .demo-icon {
+            animation-delay: 1s;
+        }
+
+        .demo-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 1rem;
+        }
+
+        .demo-description {
+            font-size: 1.125rem;
+            color: #6B7280;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .demo-features {
+            background: #F9FAFB;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .demo-feature {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+            color: #374151;
+        }
+
+        .demo-feature:last-child {
+            margin-bottom: 0;
+        }
+
+        .demo-feature-icon {
+            color: #10B981;
+            font-size: 1.25rem;
+        }
+
+        .demo-button {
+            background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.125rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        .demo-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 30px rgba(37, 99, 235, 0.4);
+        }
+
+        .info-box {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .info-box h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            color: #1F2937;
+            margin-bottom: 1rem;
+        }
+
+        .info-box p {
+            font-size: 1.125rem;
+            color: #6B7280;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-button {
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.125rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+        }
+
+        .contact-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(16, 185, 129, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .header p {
+                font-size: 1.25rem;
+            }
+
+            .demos-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .back-button {
+                top: 1rem;
+                left: 1rem;
+                padding: 0.625rem 1.25rem;
+                font-size: 0.875rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="back-button">
+        <span>←</span>
+        <span>Retour Accueil</span>
+    </a>
+
+    <div class="container">
+        <div class="header">
+            <h1>Testez Nos Démos</h1>
+            <p>Choisissez votre type d'établissement</p>
+        </div>
+
+        <div class="demos-grid">
+            <!-- Restaurant Demo -->
+            <a href="/restaurant" class="demo-card">
+                <div class="demo-icon">🍽️</div>
+                <h2 class="demo-title">Restaurant</h2>
+                <p class="demo-description">Menu gastronomique avec commande WhatsApp</p>
+                
+                <div class="demo-features">
+                    <div class="demo-feature">
+                        <span class="demo-feature-icon">✓</span>
+                        <span>2 plats signature</span>
+                    </div>
+                    <div class="demo-feature">
+                        <span class="demo-feature-icon">✓</span>
+                        <span>Prix affichés</span>
+                    </div>
+                    <div class="demo-feature">
+                        <span class="demo-feature-icon">✓</span>
+                        <span>Commande WhatsApp</span>
+                    </div>
+                </div>
+
+                <button class="demo-button">
+                    <span>Tester la Démo</span>
+                    <span>→</span>
+                </button>
+            </a>
+
+            <!-- Maquis Demo -->
+            <a href="/maquis" class="demo-card">
+                <div class="demo-icon">🍗</div>
+                <h2 class="demo-title">Maquis</h2>
+                <p class="demo-description">Carte simple avec grillades et boissons</p>
+                
+                <div class="demo-features">
+                    <div class="demo-feature">
+                        <span class="demo-feature-icon">✓</span>
+                        <span>2 boissons</span>
+                    </div>
+                    <div class="demo-feature">
+                        <span class="demo-feature-icon">✓</span>
+                        <span>Interface rapide</span>
+                    </div>
+                    <div class="demo-feature">
+                        <span class="demo-feature-icon">✓</span>
+                        <span>Commande directe</span>
+                    </div>
+                </div>
+
+                <button class="demo-button">
+                    <span>Tester la Démo</span>
+                    <span>→</span>
+                </button>
+            </a>
+
+            <!-- Hôtel Demo -->
+            <a href="/hotel" class="demo-card">
+                <div class="demo-icon">🏨</div>
+                <h2 class="demo-title">Hôtel</h2>
+                <p class="demo-description">Services premium avec room service</p>
+                
+                <div class="demo-features">
+                    <div class="demo-feature">
+                        <span class="demo-feature-icon">✓</span>
+                        <span>2 services hôtel</span>
+                    </div>
+                    <div class="demo-feature">
+                        <span class="demo-feature-icon">✓</span>
+                        <span>Gestion chambres</span>
+                    </div>
+                    <div class="demo-feature">
+                        <span class="demo-feature-icon">✓</span>
+                        <span>Commande rapide</span>
+                    </div>
+                </div>
+
+                <button class="demo-button">
+                    <span>Tester la Démo</span>
+                    <span>→</span>
+                </button>
+            </a>
+        </div>
+
+        <div class="info-box">
+            <h3>💡 Intéressé par votre propre système ?</h3>
+            <p>Contactez-nous pour un devis personnalisé adapté à votre établissement</p>
+            <a href="https://wa.me/22656626261?text=Bonjour, j'ai testé vos démos et je veux mon propre système" class="contact-button">
+                <span>Demander un Devis</span>
+                <span>📱</span>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

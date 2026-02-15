@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Démo Hôtel - Services Premium</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #059669 0%, #10B981 100%);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 1.5rem;
+            left: 1.5rem;
+            background: white;
+            color: #059669;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+        }
+
+        .back-button:hover {
+            transform: translateX(-5px);
+        }
+
+        .demo-badge {
+            position: fixed;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: #2563EB;
+            color: white;
+            padding: 0.5rem 1.25rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.875rem;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+            z-index: 100;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding-top: 5rem;
+        }
+
+        .header {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 24px;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .header h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #1F2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.125rem;
+            color: #6B7280;
+        }
+
+        .menu-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 24px;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid #10B981;
+        }
+
+        .menu-item {
+            background: #ECFDF5;
+            padding: 2rem;
+            border-radius: 16px;
+            margin-bottom: 1.5rem;
+            border: 2px solid #A7F3D0;
+            transition: all 0.3s ease;
+        }
+
+        .menu-item:hover {
+            border-color: #10B981;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.2);
+        }
+
+        .menu-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .item-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .item-name {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-description {
+            font-size: 1.125rem;
+            color: #065F46;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .item-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-tag {
+            background: white;
+            color: #059669;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            border: 1px solid #10B981;
+        }
+
+        .request-btn {
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            border: none;
+            font-size: 1.125rem;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
+        }
+
+        .request-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
+        }
+
+        .request-btn:active {
+            transform: translateY(-1px);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding-top: 4rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="/demos" class="back-button">
+        <span>←</span>
+        <span>Retour</span>
+    </a>
+
+    <div class="demo-badge">🎬 MODE DÉMO</div>
+
+    <div class="container">
+        <div class="header">
+            <div class="header-icon">🏨</div>
+            <h1>Hôtel Azur</h1>
+            <p>Services Premium - Exemple</p>
+        </div>
+
+        <div class="menu-section">
+            <h2 class="section-title">Nos Services</h2>
+
+            <div class="menu-item">
+                <div class="item-icon">🍽️</div>
+                <div class="item-name">Room Service</div>
+                <p class="item-description">
+                    Profitez de notre menu gastronomique directement dans le confort de votre chambre. Service disponible 24h/24 pour votre plus grand plaisir.
+                </p>
+                <div class="item-features">
+                    <span class="feature-tag">🕐 24h/24</span>
+                    <span class="feature-tag">🍽️ Menu Complet</span>
+                    <span class="feature-tag">⚡ Service Rapide</span>
+                </div>
+                <button class="request-btn" onclick="sendRequest('Room Service')">
+                    <span>Demander le Service</span>
+                    <span>📱</span>
+                </button>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-icon">💆</div>
+                <div class="item-name">Spa & Bien-être</div>
+                <p class="item-description">
+                    Détendez-vous avec nos soins spa premium : massages, soins du visage, hammam et sauna. Réservez votre moment de relaxation absolue.
+                </p>
+                <div class="item-features">
+                    <span class="feature-tag">💆 Massages</span>
+                    <span class="feature-tag">🧖 Hammam</span>
+                    <span class="feature-tag">✨ Soins Premium</span>
+                </div>
+                <button class="request-btn" onclick="sendRequest('Spa & Bien-être')">
+                    <span>Réserver le Spa</span>
+                    <span>📱</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function sendRequest(serviceName) {
+            let message = `🏨 *DEMANDE HÔTEL AZUR*\n\n`;
+            message += `Service demandé: ${serviceName}\n\n`;
+            message += `Je souhaite obtenir plus d'informations sur ce service.\n`;
+            message += `\n---\n_Ceci est une démo. Contactez-nous pour votre propre système !_`;
+
+            window.open(`https://wa.me/22656626261?text=${encodeURIComponent(message)}`, '_blank');
+        }
+    </script>
+</body>
+</html>
